@@ -1,0 +1,35 @@
+1) Direct File Nginx : 
+
+cd /etc/nginx/sites-available
+
+2) create file : 
+
+nano {beri_nama}.conf
+
+3) paste and save this code : 
+
+server {
+        listen 80;
+        server_name {subdomain}.{domain_name}.com;
+        proxy_set_header Host   $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        location / {
+                proxy_pass http://{public_ip}:{port}/;
+        }
+}
+
+
+4) run command :
+
+ln -s /etc/nginx/sites-available/{beri_nama}.conf /etc/nginx/sites-enabled/{beri_nama}.conf
+
+
+5) check nginx : 
+
+nginx -t
+
+6) restart nginx :
+
+systemctl restart nginx.service
+
