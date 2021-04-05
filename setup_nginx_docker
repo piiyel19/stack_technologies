@@ -1,0 +1,5 @@
+1) docker pull nginx
+
+2) docker run --name my_nginx -p 80:80 -d nginx
+
+3) docker ps
