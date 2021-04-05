@@ -13,3 +13,9 @@ docker run -i --rm -t -p 8888:8888 continuumio/anaconda3 /bin/sh -c "/opt/conda/
 4) Open jupyter :
 
 http:{ip}:{port/8888}
+
+
+
+#demo account : 
+
+http://167.172.134.154:8888/
