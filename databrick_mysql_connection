@@ -1,0 +1,30 @@
+1) First Create Cluster 
+
+2) Select Libraries => Install New => Select Library Source = "Maven" => Coordinates => Search Packages => Select Maven Central => Search for the package required. Example: mysql-connector-java library => Select the version required => Install
+
+3) Write Code Connection : 
+
+
+driver = "com.mysql.jdbc.Driver"
+url = "jdbc:mysql://{ip}:3306"
+table = "{database_name}.{table_name}"
+user = "{username}"
+password = "{password}"
+
+remote_table = spark.read.format("jdbc")\
+  .option("driver", driver)\
+  .option("url", url)\
+  .option("dbtable", table)\
+  .option("user", user)\
+  .option("password", password)\
+  .load()
+  
+  
+  
+ 4) Try Select Column : 
+
+
+display(remote_table.select("{field_name}"))
+  
+  
+ 
