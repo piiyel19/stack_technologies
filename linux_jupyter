@@ -1,0 +1,7 @@
+1) Run jupyter
+
+jupyter notebook --ip {ip} --port 8888 --allow-root
+
+2) Run jupyter background
+
+nohup jupyter notebook --ip {ip} --port 8888 --allow-root
