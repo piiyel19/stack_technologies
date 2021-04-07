@@ -1,0 +1,19 @@
+1) Setup First Apache Spark 
+
+2) Download n extract JDBC MYSQL Connector 
+
+3) Write test.py
+
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.config("spark.jars", "/root/myspark/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47.jar") \
+    .master("local").appName("PySpark_MySQL_test").getOrCreate()
+
+wine_df = spark.read.format("jdbc").option("url", "jdbc:mysql://{ip}:3306/{database}?useSSL=false") \
+    .option("driver", "com.mysql.jdbc.Driver").option("dbtable", "{table_name}") \
+    .option("user", "{username}").option("password", "{password}").load()
+
+
+data = wine_df.select("link").show()
+
+
+print(data)
