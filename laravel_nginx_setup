@@ -1,0 +1,75 @@
+__________________________SETUP_PHP_ARTISAN_______________________________________
+
+1) Ubuntu Enviroment
+
+2) Run Terminal : 
+
+sudo apt-get update
+sudo apt-get install curl
+sudo curl -s https://getcomposer.org/installer | php
+
+3) Set Permission :
+
+sudo mv composer.phar /usr/local/bin/composer
+chmod +x /usr/local/bin/composer
+
+__________________________SETUP_PROJECT_LARAVEL_______________________________________
+
+1) Ubuntu Enviroment
+
+2) Go To Folder Project : 
+
+cd /var/www/html 
+
+noted : Create html if not existing 
+
+3) Create Laravel Project : 
+
+composer create-project laravel/laravel {nama_projek} --prefer-dist "7.*"  
+
+noted : ini adalah version --prefer-dist "7.*"  
+
+4) Set Permission : 
+
+sudo chown -R www-data:www-data /var/www/html/{nama_projek}/
+sudo chmod -R 755 /var/www/html/{nama_projek}/
+
+5) Run / Test Application 
+
+php artisan serve --host={ip} --port={port}
+
+__________________________SETUP_SUB_DOMAIN_______________________________________
+
+
+1) Install Nginx 
+
+2) Direct File : 
+cd /etc/nginx/sites-available
+
+3) Create Conf : 
+nano {nama_domain}.conf
+
+4) Paste Code : 
+
+server {
+        listen 80;
+        server_name {nama_domain};
+        proxy_set_header Host   $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        location / {
+                proxy_pass http://{ip}:{port}/;
+        }
+}
+
+
+5) Copy Paste : 
+
+ln -s /etc/nginx/sites-available/{nama_domain}.conf /etc/nginx/sites-enabled/{nama_domain}.conf
+
+
+6) Restart Nginx : 
+
+nginx -t
+
+systemctl restart nginx.service
