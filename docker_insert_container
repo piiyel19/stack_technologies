@@ -1,0 +1,12 @@
+1) Check images :
+
+docker ps
+
+2) Insert to bash : 
+
+docker exec -it {nama_images} /bin/bash
+
+3) To Exit From Images : 
+
+exit
+
